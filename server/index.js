@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const settings = require('../settings.json');
 
 const port = process.env.PORT || settings['api-port'];
@@ -20,7 +22,13 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, './static')));
 
 app.get('/', (req, res)=>{
-    res.sendFile(path.join(__dirname, './static/index.html'));
+    const filePath = path.join(__dirname, './static/index.html');
+    if(fs.exists(filePath)){
+        res.sendFile(path.join(__dirname, './static/index.html'));
+    }else{
+        res.send('Build files not found. Please try to build and run again');
+    }
+    
 });
 
 app.use('/api/users', require('./routers/users'));
