@@ -1,9 +1,17 @@
-const port = process.env.PORT || 8081;
+const settings = require('../settings.json');
+
+const port = process.env.PORT || settings['api-port'];
 
 const path = require('path');
 
 const express = require('express');
 const app = express();
+
+const mongoose = require('mongoose');
+mongoose.connect(settings['db-connection']);
+const db = mongoose.connection;
+db.on('error', () => console.log('LOG >> Database error connection!'));
+db.once('open', () => console.log('LOG >> Database connected!'));
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,5 +26,5 @@ app.get('/', (req, res)=>{
 app.use('/api/users', require('./routers/users'));
 
 app.listen(port, ()=>{
-    console.log('Server application listening at %d', port);
+    console.log('LOG >> Server application listening at %d', port);
 });

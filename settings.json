@@ -1,0 +1,5 @@
+{
+    "production": false,
+    "api-port": 9000,
+    "db-connection" : "mongodb://localhost/mevn-app-db"
+}
