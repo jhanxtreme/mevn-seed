@@ -1,4 +1,4 @@
-# mevn-app
+# mevn-seed
 
 ``` bash
 # install dependencies
