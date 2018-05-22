@@ -22,9 +22,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, './static')));
 
 app.get('/', (req, res)=>{
-    const filePath = path.join(__dirname, './static/index.html');
-    if(fs.exists(filePath)){
-        res.sendFile(path.join(__dirname, './static/index.html'));
+    const indexFilePath = path.join(__dirname, './static/index.html');
+    if(fs.exists(indexFilePath)){
+        res.sendFile(indexFilePath);
     }else{
         res.send('Build files not found. Please try to build and run again');
     }
